@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="23dea391-8149-4c0a-bd9d-279553a39b34" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/main/data/Data.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/main/utilities/Filters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chollometro/Home.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chollometro/drivers/ChromeDriver.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/drivers/ChromeDriver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chollometro/model/Product.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/model/Product.py" afterDir="false" />
-    </list>
+    <list default="true" id="23dea391-8149-4c0a-bd9d-279553a39b34" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +140,7 @@
       <workItem from="1567750715246" duration="21223000" />
       <workItem from="1567780143875" duration="1660000" />
       <workItem from="1568013018331" duration="13104000" />
-      <workItem from="1568027716751" duration="2612000" />
+      <workItem from="1568027716751" duration="2954000" />
     </task>
     <servers />
   </component>
