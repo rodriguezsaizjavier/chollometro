@@ -3,7 +3,7 @@ from selenium.webdriver import ActionChains
 from app.main.drivers.ChromeDriver import *
 
 
-def chollo_conn():
+def get_catalog():
     driver().get("https://www.chollometro.com/nuevos")
 
     spinner = driver().find_element_by_id("spinner")
@@ -15,13 +15,8 @@ def chollo_conn():
 
     # Selector del catalogo en bruto
     CATALOG = driver().find_elements_by_css_selector("section.gridLayout > div.gridLayout-item > article")
-
-    return CATALOG
-
-
-def get_catalog(data):
     # Lista con los webelements del catalogo
-    catalog = [item for item in data]
+    catalog = [item for item in CATALOG]
 
     products_catalog_json = []
 
