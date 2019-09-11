@@ -12,7 +12,7 @@ def filter_by_rate(data, rate):
 def filter_by_name(data, name):
     list_by_name = []
     for item in data:
-        if name in item['name'] or item['msg']:
+        if name in item['name'] or name in item['msg']:
             list_by_name.append(item)
 
     return list_by_name

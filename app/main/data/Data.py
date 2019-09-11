@@ -50,7 +50,7 @@ def get_catalog():
             rate = item.find_element_by_css_selector(
                 "section.gridLayout > div.gridLayout-item > article > div:nth-child(4) > span:nth-child(2) > span:nth-child(2)").text
         except:
-            rate = "..."
+            rate = None
         try:
             delivery = item.find_element_by_css_selector(
                 "section.gridLayout > div.gridLayout-item > article > div:nth-child(4) > span:nth-child(3) > span > span").text
