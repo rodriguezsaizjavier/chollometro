@@ -51,18 +51,18 @@ def get_data():
 
         expired = True if EXPIRED in item.get('class') else False
 
-        products_catalog_json.append({
-            'category': category,
-            'image': image,
-            'name': name,
-            'price': price,
-            'old_price': old_price,
-            'rate': rate,
-            'delivery': delivery,
-            'msg': msg,
-            'user': user,
-            'link': link,
-            'expired': expired
-        })
+        if expired is False:
+            products_catalog_json.append({
+                'category': category,
+                'image': image,
+                'name': name,
+                'price': price,
+                'old_price': old_price,
+                'rate': rate,
+                'delivery': delivery,
+                'msg': msg,
+                'user': user,
+                'link': link,
+            })
 
     return products_catalog_json
