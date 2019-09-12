@@ -1,54 +1,53 @@
 import urllib
 import urllib.request as request
-
 import bs4
 from bs4 import BeautifulSoup
 
+from app.main.data.ProductLocator import *
 
-def try_it(text):
-    return None if text is None or len(text) is 0 else text[0].text
+
+def try_it(data):
+    return None if data is None or len(data) is 0 else data[0].text
+
+
+def try_with_attribute(data, attribute):
+    return None if data is None or len(data) is 0 else data[0].get(attribute)
 
 
 def get_data():
-
     products_catalog_json = []
-    url = 'https://www.chollometro.com/nuevos'
+    url = 'https://www.chollometro.com/populares'
     req = urllib.request.Request(url, headers={'User-Agent': ""})
 
     data = urllib.request.urlopen(req)
 
     soup = BeautifulSoup(data, "lxml")
 
-    CATALOG = soup.select('section.gridLayout > div.gridLayout-item > article')
+    catalog = soup.select(CATALOG)
 
-    for item in CATALOG:
-        # a:bs4.element.Tag = item
-        # a.get()
-        category = try_it(item.select('section.gridLayout > div.gridLayout-item > article > div > div > span'))
+    for item in catalog:
 
-        if len(item.select('.thread-image')) is 0:
-            image = "None"
-        else:
-            image = item.select('.thread-image')[0].get('src')
+        category = try_it(item.select(CATEGORY))
 
-        name = try_it(item.select('.thread-title'))
+        image = try_with_attribute(item.select(IMAGE), 'src')
 
-        price = try_it(item.select('.thread-price'))
+        name = try_it(item.select(NAME))
 
-        old_price = try_it(item.select('section.gridLayout > div.gridLayout-item > article > div:nth-child(4) > span:nth-child(2) > span:nth-child(1)'))
+        price = try_it(item.select(PRICE))
 
-        rate = try_it(item.select('section.gridLayout > div.gridLayout-item > article > div:nth-child(4) > span:nth-child(2) > span:nth-child(2)'))
+        old_price = try_it(item.select(OLD_PRICE))
 
-        delivery = try_it(item.select('section.gridLayout > div.gridLayout-item > article > div:nth-child(4) > span:nth-child(3) > span > span'))
+        rate = try_it(item.select(RATE))
 
-        msg = try_it(item.select('section.gridLayout > div.gridLayout-item > article > div:nth-child(5) > div > div'))
+        delivery = try_it(item.select(DELIVERY))
 
-        user = try_it(item.select('.thread-username'))
+        msg = try_it(item.select(MSG))
 
-        if len(item.select('.thread-image')) is 0:
-            link = "None"
-        else:
-            link = item.select('section.gridLayout > div.gridLayout-item > article > div:nth-child(7) > a')[0].get('href')
+        user = try_it(item.select(USER))
+
+        link = try_with_attribute(item.select(LINK), 'href')
+
+        expired = True if EXPIRED in item.get('class') else False
 
         products_catalog_json.append({
             'category': category,
@@ -60,7 +59,8 @@ def get_data():
             'delivery': delivery,
             'msg': msg,
             'user': user,
-            'link': link
+            'link': link,
+            'expired': expired
         })
 
     return products_catalog_json

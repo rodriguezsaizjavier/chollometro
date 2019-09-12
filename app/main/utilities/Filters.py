@@ -1,18 +1,11 @@
+def filter_by_rate(item, rate):
+    return True if item['rate'] is not None and item['rate'][2:-2].isnumeric() and int(
+        item['rate'][2:-2]) > rate else False
 
 
-def filter_by_rate(data, rate):
-    list_by_rate = []
-    for item in data:
-        if item['rate'][2:-2].isnumeric() and int(item['rate'][2:-2]) > rate:
-            list_by_rate.append(item)
-
-    return list_by_rate
+def filter_by_name(item, name):
+    return True if name in item['name'] or name in item['msg'] else False
 
 
-def filter_by_name(data, name):
-    list_by_name = []
-    for item in data:
-        if name in item['name'] or name in item['msg']:
-            list_by_name.append(item)
-
-    return list_by_name
+def filter_by_not_expired(item):
+    return False if item['expired'] is True else True

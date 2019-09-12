@@ -1,16 +1,22 @@
 from flask_restful import Api, Resource
 from app.main import create_app
 from app.main.data.Data2 import get_data
+from app.main.utilities.Filters import filter_by_rate, filter_by_name, filter_by_not_expired
 
 app = create_app()
 api = Api(app)
+
+filters = list(filter(lambda x: filter_by_rate(x, 1) and filter_by_name(x, 'Nintendo'), get_data()))
+filters = list(filter(lambda x: filter_by_not_expired(x), get_data()))
+
+data = get_data()
 
 
 class CatalogService(Resource):
 
     @staticmethod
     def get():
-        return get_data()
+        return filters
 
 
 api.add_resource(CatalogService, '/catalog')
