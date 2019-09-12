@@ -1,5 +1,6 @@
 import urllib
 import urllib.request as request
+
 import bs4
 from bs4 import BeautifulSoup
 
@@ -16,17 +17,18 @@ def try_with_attribute(data, attribute):
 
 def get_data():
     products_catalog_json = []
-    url = 'https://www.chollometro.com/populares'
-    req = urllib.request.Request(url, headers={'User-Agent': ""})
 
-    data = urllib.request.urlopen(req)
+    html = ''
+    for i in range(1, 11):
+        url = 'https://www.chollometro.com/nuevos?page=' + str(i)
+        req = urllib.request.Request(url, headers={'User-Agent': ""})
+        html += str(urllib.request.urlopen(req).read())
 
-    soup = BeautifulSoup(data, "lxml")
+    soup = BeautifulSoup(html, "lxml")
 
     catalog = soup.select(CATALOG)
 
     for item in catalog:
-
         category = try_it(item.select(CATEGORY))
 
         image = try_with_attribute(item.select(IMAGE), 'src')
