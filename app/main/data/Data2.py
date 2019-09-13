@@ -1,7 +1,5 @@
 import urllib
 import urllib.request as request
-
-import bs4
 from bs4 import BeautifulSoup
 
 from app.main.data.ProductLocator import *
@@ -24,7 +22,7 @@ def get_data():
         req = urllib.request.Request(url, headers={'User-Agent': ""})
         html += str(urllib.request.urlopen(req).read())
 
-    soup = BeautifulSoup(html, "lxml")
+    soup = BeautifulSoup(html)
 
     catalog = soup.select(CATALOG)
 
@@ -62,7 +60,7 @@ def get_data():
                 'delivery': delivery,
                 'msg': msg,
                 'user': user,
-                'link': link,
+                'link': link
             })
 
     return products_catalog_json

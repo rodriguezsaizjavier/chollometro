@@ -2,6 +2,7 @@ from flask_restful import Api, Resource
 from app.main import create_app
 from app.main.data.Data2 import get_data
 from app.main.utilities.Filters import filter_by_rate, filter_by_name, filter_by_not_expired
+from app.main.utilities.Utilities import reloaded
 
 app = create_app()
 api = Api(app)
@@ -16,7 +17,7 @@ class CatalogService(Resource):
 
     @staticmethod
     def get():
-        return data
+        return reloaded(data)
 
 
 api.add_resource(CatalogService, '/catalog')
