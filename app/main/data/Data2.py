@@ -1,5 +1,6 @@
 import urllib
 import urllib.request as request
+
 from bs4 import BeautifulSoup
 
 from app.main.data.ProductLocator import *
@@ -13,20 +14,9 @@ def try_with_attribute(data, attribute):
     return None if data is None or len(data) is 0 else data[0].get(attribute)
 
 
-def get_data():
+def create_json(data):
     products_catalog_json = []
-
-    html = ''
-    for i in range(1, 11):
-        url = 'https://www.chollometro.com/nuevos?page=' + str(i)
-        req = urllib.request.Request(url, headers={'User-Agent': ""})
-        html += str(urllib.request.urlopen(req).read())
-
-    soup = BeautifulSoup(html)
-
-    catalog = soup.select(CATALOG)
-
-    for item in catalog:
+    for item in data:
         category = try_it(item.select(CATEGORY))
 
         image = try_with_attribute(item.select(IMAGE), 'src')
@@ -64,3 +54,17 @@ def get_data():
             })
 
     return products_catalog_json
+
+
+def get_raw_data(pages):
+    html = ''
+    for i in range(1, pages):
+        url = 'https://www.chollometro.com/nuevos?page=' + str(i)
+        req = urllib.request.Request(url, headers={'User-Agent': ""})
+        html += str(urllib.request.urlopen(req).read().decode("utf-8"))
+
+    soup = BeautifulSoup(html, 'lxml')
+
+    catalog = soup.select(CATALOG)
+
+    return catalog
